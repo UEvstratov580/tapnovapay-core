@@ -42,10 +42,7 @@ jobs:
         
     - name: Package app
       run: |
-        # Створюємо папку
         mkdir -p TapNovaPay-Core
-        
-        # Шукаємо .app бандл
         APP_DIR=$(find . -maxdepth 1 -type d -name "*.app" | head -1)
         if [ -d "$APP_DIR" ]; then
           echo "✅ Found app bundle: $APP_DIR"
@@ -55,22 +52,32 @@ jobs:
           ls -la
           exit 1
         fi
-        
-        # Створюємо архів
         zip -r TapNovaPay-Core-macOS.zip TapNovaPay-Core/
         echo "✅ Package created: TapNovaPay-Core-macOS.zip"
         
-    - name: Upload to Release
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
-      with:
-        files: TapNovaPay-Core-macOS.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
     - name: Upload artifact
-      if: github.event_name == 'workflow_dispatch'
       uses: actions/upload-artifact@v4
       with:
         name: TapNovaPay-macOS
         path: TapNovaPay-Core-macOS.zip
+        
+    - name: Upload to Release
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        RELEASE_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          https://api.github.com/repos/UEvstratov580/tapnovapay-core/releases/tags/${GITHUB_REF#refs/tags/} \
+          | grep -o '"id":\s*[0-9]*' | head -1 | grep -o '[0-9]*')
+        
+        if [ -n "$RELEASE_ID" ]; then
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Content-Type: application/zip" \
+            https://uploads.github.com/repos/UEvstratov580/tapnovapay-core/releases/$RELEASE_ID/assets?name=TapNovaPay-Core-macOS.zip \
+            --data-binary @TapNovaPay-Core-macOS.zip
+          echo "✅ Uploaded to Release!"
+        else
+          echo "❌ Release not found"
+          exit 1
+        fi
