@@ -1,0 +1,22 @@
+name: Build macOS
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: brew install qt5
+    - run: echo "/opt/homebrew/opt/qt5/bin" >> $GITHUB_PATH
+    - run: qmake tapnovapay-gui.pro && make -j$(sysctl -n hw.ncpu)
+    - run: |
+        mkdir -p TapNovaPay-Core
+        cp -r TapNovaPay.app TapNovaPay-Core/
+        zip -r TapNovaPay-Core-macOS.zip TapNovaPay-Core/
+    - uses: softprops/action-gh-release@v1
+      with:
+        files: TapNovaPay-Core-macOS.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
