@@ -1,0 +1,23 @@
+// В методі changeLanguage:
+void MainWindow::changeLanguage(int index) {
+    QString lang = index == 0 ? "uk" : "en";
+    if (m_currentLang == lang) return;
+    
+    m_currentLang = lang;
+    
+    // Видаляємо старий переклад
+    qApp->removeTranslator(&m_translator);
+    
+    // Завантажуємо новий
+    if (m_translator.load("translations/tapnovapay_" + lang + ".qm")) {
+        qApp->installTranslator(&m_translator);
+        // Оновлюємо всі тексти
+        ui->retranslateUi(this);
+        retranslateUI();
+        
+        QString langName = (lang == "uk") ? "Українську" : "English";
+        QMessageBox::information(this, "Мова", "Мову змінено на " + langName);
+    } else {
+        QMessageBox::warning(this, "Помилка", "Не вдалося завантажити переклад");
+    }
+}

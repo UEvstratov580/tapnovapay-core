@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x><y>0</y><width>900</width><height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TapNovaPay Core</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="headerFrame">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #1a1a1a; border-bottom: 1px solid #2a2a2a;</string>
+      </property>
+      <layout class="QHBoxLayout" name="headerLayout">
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="logoLabel">
+         <property name="text">
+          <string>&lt;h2&gt;💰 TapNovaPay Core&lt;/h2&gt;</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #f7931a; font-weight: bold;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="langCombo">
+         <property name="styleSheet">
+          <string>background-color: #2a2a2a; color: #ffffff; border: 1px solid #3a3a3a; border-radius: 4px; padding: 5px;</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>🌍 Українська</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>🌍 English</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="statusLabel">
+         <property name="text">
+          <string>🔴 Відключено</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #e74c3c; font-weight: bold; padding: 5px 15px; background-color: #2a2a2a; border-radius: 4px;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="contentFrame">
+      <property name="styleSheet">
+       <string>background-color: #1e1e1e;</string>
+      </property>
+      <layout class="QHBoxLayout" name="contentLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="sidebarFrame">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string>background-color: #151515; border-right: 1px solid #2a2a2a;</string>
+         </property>
+         <layout class="QVBoxLayout" name="sidebarLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="overviewButton">
+            <property name="text">
+             <string>📊 Огляд</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: transparent; color: #8a8a8a; border: none; padding: 12px 20px; text-align: left; font-size: 14px; border-left: 3px solid transparent; }
+QPushButton:hover { background-color: #2a2a2a; color: #ffffff; }
+QPushButton:checked { background-color: #2a2a2a; color: #f7931a; border-left: 3px solid #f7931a; }</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="sendButton">
+            <property name="text">
+             <string>📤 Відправити</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: transparent; color: #8a8a8a; border: none; padding: 12px 20px; text-align: left; font-size: 14px; border-left: 3px solid transparent; }
+QPushButton:hover { background-color: #2a2a2a; color: #ffffff; }
+QPushButton:checked { background-color: #2a2a2a; color: #f7931a; border-left: 3px solid #f7931a; }</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="receiveButton">
+            <property name="text">
+             <string>📥 Отримати</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: transparent; color: #8a8a8a; border: none; padding: 12px 20px; text-align: left; font-size: 14px; border-left: 3px solid transparent; }
+QPushButton:hover { background-color: #2a2a2a; color: #ffffff; }
+QPushButton:checked { background-color: #2a2a2a; color: #f7931a; border-left: 3px solid #f7931a; }</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="historyButton">
+            <property name="text">
+             <string>📜 Історія</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: transparent; color: #8a8a8a; border: none; padding: 12px 20px; text-align: left; font-size: 14px; border-left: 3px solid transparent; }
+QPushButton:hover { background-color: #2a2a2a; color: #ffffff; }
+QPushButton:checked { background-color: #2a2a2a; color: #f7931a; border-left: 3px solid #f7931a; }</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="settingsButton">
+            <property name="text">
+             <string>⚙️ Налаштування</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: transparent; color: #8a8a8a; border: none; padding: 12px 20px; text-align: left; font-size: 14px; border-left: 3px solid transparent; }
+QPushButton:hover { background-color: #2a2a2a; color: #ffffff; }
+QPushButton:checked { background-color: #2a2a2a; color: #f7931a; border-left: 3px solid #f7931a; }</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="connectButton">
+            <property name="text">
+             <string>🌐 Підключити</string>
+            </property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #2a6a5a; color: #ffffff; border: none; border-radius: 4px; padding: 10px; margin: 0 10px; font-weight: bold; }
+QPushButton:hover { background-color: #3a7a6a; }
+QPushButton:pressed { background-color: #1a5a4a; }</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="styleSheet">
+          <string>background-color: #1e1e1e;</string>
+         </property>
+         <widget class="QWidget" name="overviewPage">
+          <layout class="QVBoxLayout" name="overviewLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>30</number>
+           </property>
+           <property name="topMargin">
+            <number>30</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="balanceFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QVBoxLayout" name="balanceFrameLayout">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>20</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="balanceTitleLabel">
+                <property name="text">
+                 <string>Загальний баланс</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #8a8a8a; font-size: 14px;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="balanceLabel">
+                <property name="text">
+                 <string>0.00000000</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #f7931a; font-size: 36px; font-weight: bold;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="balanceSatLabel">
+                <property name="text">
+                 <string>0 сатоші</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #6a6a6a; font-size: 12px;</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="addressFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QVBoxLayout" name="addressFrameLayout">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>15</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>15</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="addressTitleLabel">
+                <property name="text">
+                 <string>Поточна адреса</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #8a8a8a; font-size: 12px;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="addressLabel">
+                <property name="text">
+                 <string>Адресу не створено</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #6a6a6a; font-family: Consolas; font-size: 12px;</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="infoFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QHBoxLayout" name="infoFrameLayout">
+              <property name="spacing">
+               <number>10</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="heightLabel">
+                <property name="text">
+                 <string>📊 Висота: 0</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #8a8a8a; font-size: 12px;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="networkLabel">
+                <property name="text">
+                 <string>🌐 testnet</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #8a8a8a; font-size: 12px;</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="sendPage">
+          <layout class="QVBoxLayout" name="sendLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>30</number>
+           </property>
+           <property name="topMargin">
+            <number>30</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="sendTitleLabel">
+             <property name="text">
+              <string>&lt;h2&gt;📤 Відправити кошти&lt;/h2&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string>color: #f7931a;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="sendFormFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QVBoxLayout" name="sendFormLayout">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>20</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="sendToLabel">
+                <property name="text">
+                 <string>Адреса отримувача</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #ffffff; font-weight: bold;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="sendAddressEdit">
+                <property name="placeholderText">
+                 <string>Введіть адресу...</string>
+                </property>
+                <property name="styleSheet">
+                 <string>QLineEdit { background-color: #1a1a1a; color: #ffffff; border: 1px solid #3a3a3a; border-radius: 4px; padding: 10px; }
+QLineEdit:focus { border-color: #f7931a; }</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="sendAmountLabel">
+                <property name="text">
+                 <string>Сума (TNP)</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #ffffff; font-weight: bold;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDoubleSpinBox" name="sendAmountSpin">
+                <property name="decimals">
+                 <number>8</number>
+                </property>
+                <property name="maximum">
+                 <double>99999999.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.010000000000000</double>
+                </property>
+                <property name="styleSheet">
+                 <string>QDoubleSpinBox { background-color: #1a1a1a; color: #ffffff; border: 1px solid #3a3a3a; border-radius: 4px; padding: 10px; }
+QDoubleSpinBox:focus { border-color: #f7931a; }</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="sendFeeLayout">
+                <item>
+                 <widget class="QLabel" name="sendFeeLabel">
+                  <property name="text">
+                   <string>Комісія:</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string>color: #8a8a8a;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="sendFeeValueLabel">
+                  <property name="text">
+                   <string>0.001 TNP</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string>color: #8a8a8a;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QPushButton" name="sendConfirmButton">
+                <property name="text">
+                 <string>✅ Підтвердити відправку</string>
+                </property>
+                <property name="styleSheet">
+                 <string>QPushButton { background-color: #f7931a; color: #1a1a1a; border: none; border-radius: 4px; padding: 12px; font-weight: bold; font-size: 14px; }
+QPushButton:hover { background-color: #f8a43a; }
+QPushButton:pressed { background-color: #e6830a; }</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="receivePage">
+          <layout class="QVBoxLayout" name="receiveLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>30</number>
+           </property>
+           <property name="topMargin">
+            <number>30</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="receiveTitleLabel">
+             <property name="text">
+              <string>&lt;h2&gt;📥 Отримати кошти&lt;/h2&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string>color: #f7931a;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="receiveFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QVBoxLayout" name="receiveFrameLayout">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>20</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="receiveAddressLabel">
+                <property name="text">
+                 <string>Ваша адреса</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #ffffff; font-weight: bold;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="receiveAddressEdit">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string>QLineEdit { background-color: #1a1a1a; color: #8a8a8a; border: 1px solid #3a3a3a; border-radius: 4px; padding: 10px; font-family: Consolas; }
+QLineEdit:focus { border-color: #f7931a; }</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="receiveButtonsLayout">
+                <item>
+                 <widget class="QPushButton" name="receiveCopyButton">
+                  <property name="text">
+                   <string>📋 Копіювати</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string>QPushButton { background-color: #3a3a3a; color: #ffffff; border: none; border-radius: 4px; padding: 8px 16px; }
+QPushButton:hover { background-color: #4a4a4a; }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="receiveNewButton">
+                  <property name="text">
+                   <string>🔄 Нова адреса</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string>QPushButton { background-color: #2a5a8a; color: #ffffff; border: none; border-radius: 4px; padding: 8px 16px; }
+QPushButton:hover { background-color: #3a6a9a; }</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="historyPage">
+          <layout class="QVBoxLayout" name="historyLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>30</number>
+           </property>
+           <property name="topMargin">
+            <number>30</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="historyTitleLabel">
+             <property name="text">
+              <string>&lt;h2&gt;📜 Історія транзакцій&lt;/h2&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string>color: #f7931a;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="historyTable">
+             <property name="styleSheet">
+              <string>QTableWidget { background-color: #2a2a2a; color: #ffffff; border: 1px solid #3a3a3a; border-radius: 8px; gridline-color: #3a3a3a; }
+QTableWidget::item { padding: 8px; }
+QHeaderView::section { background-color: #1a1a1a; color: #8a8a8a; padding: 8px; border: none; }
+QTableWidget::item:selected { background-color: #3a3a3a; }</string>
+             </property>
+             <property name="columnCount">
+              <number>5</number>
+             </property>
+             <column/>
+             <column/>
+             <column/>
+             <column/>
+             <column/>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="settingsPage">
+          <layout class="QVBoxLayout" name="settingsLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>30</number>
+           </property>
+           <property name="topMargin">
+            <number>30</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="settingsTitleLabel">
+             <property name="text">
+              <string>&lt;h2&gt;⚙️ Налаштування&lt;/h2&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string>color: #f7931a;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="settingsFrame">
+             <property name="styleSheet">
+              <string>background-color: #2a2a2a; border-radius: 8px; border: 1px solid #3a3a3a;</string>
+             </property>
+             <layout class="QVBoxLayout" name="settingsFrameLayout">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
+              <property name="topMargin">
+               <number>20</number>
+              </property>
+              <property name="rightMargin">
+               <number>20</number>
+              </property>
+              <property name="bottomMargin">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="settingsNodeLabel">
+                <property name="text">
+                 <string>🌐 Підключення до ноди</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #ffffff; font-weight: bold;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="settingsNodeInfoLabel">
+                <property name="text">
+                 <string>185.235.218.214:80 (через Nginx проксі)</string>
+                </property>
+                <property name="styleSheet">
+                 <string>color: #8a8a8a; font-size: 12px;</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

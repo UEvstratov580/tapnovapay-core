@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>wallet.ico</file>
+        <file>TNP-logo.png</file>
+    </qresource>
+</RCC>

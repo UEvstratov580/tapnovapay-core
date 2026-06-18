@@ -1,0 +1,22 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -O2 -Wall -Iinclude -Isrc -I/mingw64/include
+LDFLAGS = -lssl -lcrypto -lcurl -lsqlite3 -lnlohmann_json -lpthread
+
+SRCS = src/main.cpp src/MainWindow.cpp src/Wallet.cpp src/RPCClient.cpp \
+       src/Crypto.cpp src/Config.cpp src/SyncDialog.cpp src/Security.cpp \
+       src/SecurityMonitor.cpp src/TransactionSigner.cpp src/DeveloperSignature.cpp
+OBJS = $(SRCS:.cpp=.o)
+TARGET = releases/linux/TapNovaPay-Core/tapnovapay-core
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(LDFLAGS) -o $@
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+.PHONY: all clean

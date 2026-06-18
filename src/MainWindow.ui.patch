@@ -1,0 +1,21 @@
+--- a/src/MainWindow.ui
++++ b/src/MainWindow.ui
+@@ -196,6 +196,19 @@
+              </property>
+             </widget>
+            </item>
++          <item>
++           <widget class="QPushButton" name="createWalletButton">
++            <property name="text">
++             <string>🆕 Створити гаманець</string>
++            </property>
++            <property name="styleSheet">
++             <string>QPushButton { background-color: #f7931a; color: #1a1a1a; border: none; border-radius: 4px; padding: 10px; margin: 5px 10px; font-weight: bold; }
++QPushButton:hover { background-color: #f8a43a; }
++QPushButton:pressed { background-color: #e6830a; }</string>
++            </property>
++           </widget>
++          </item>
+           <item>
+            <spacer>
+             <property name="orientation">
