@@ -1,22 +1,65 @@
 name: Build macOS
+
 on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: macos-latest
+    
     steps:
-    - uses: actions/checkout@v3
-    - run: brew install qt5
-    - run: echo "/opt/homebrew/opt/qt5/bin" >> $GITHUB_PATH
-    - run: qmake tapnovapay-gui.pro && make -j$(sysctl -n hw.ncpu)
-    - run: |
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install Qt
+      run: |
+        brew install qt5
+        echo "/opt/homebrew/opt/qt5/bin" >> $GITHUB_PATH
+        
+    - name: Install nlohmann/json
+      run: |
+        # Варіант 1: через brew
+        brew install nlohmann-json || true
+        
+        # Варіант 2: завантажити напряму (якщо brew не спрацює)
+        mkdir -p include/nlohmann
+        curl -L -o include/nlohmann/json.hpp \
+          https://github.com/nlohmann/json/releases/download/v3.11.2/json.hpp
+        
+    - name: Fix .pro file
+      run: |
+        sed -i '' 's/-lws2_32//g' tapnovapay-gui.pro
+        sed -i '' 's/-lcrypt32//g' tapnovapay-gui.pro
+        # Додаємо шлях до include
+        if ! grep -q "INCLUDEPATH += include" tapnovapay-gui.pro; then
+          echo "INCLUDEPATH += include" >> tapnovapay-gui.pro
+        fi
+        
+    - name: Build
+      run: |
+        qmake tapnovapay-gui.pro CONFIG+=sdk_no_version_check
+        make -j$(sysctl -n hw.ncpu)
+        
+    - name: Package app
+      run: |
         mkdir -p TapNovaPay-Core
         cp -r TapNovaPay.app TapNovaPay-Core/
         zip -r TapNovaPay-Core-macOS.zip TapNovaPay-Core/
-    - uses: softprops/action-gh-release@v1
+        
+    - name: Upload to Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
       with:
         files: TapNovaPay-Core-macOS.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Upload artifact
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: TapNovaPay-macOS
+        path: TapNovaPay-Core-macOS.zip
