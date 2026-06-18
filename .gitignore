@@ -1,18 +1,34 @@
+# Build directories
 build/
-release/
 debug/
+release/
 *.o
 *.exe
 *.dll
 *.so
 *.dylib
-data/
-*.dat
-*.db
-*.log
-*.bak
-config.json
-wallet.json
-security_data.json
+
+# Qt
+*.pro.user
+*.pro.user.*
+Makefile
+Makefile.*
+ui_*.h
+qrc_*.cpp
+moc_*.cpp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+*.tmp
